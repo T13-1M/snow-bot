@@ -24,7 +24,7 @@ Untuk menjalankan bot ini di servermu sendiri, ikuti langkah-langkah berikut:
 #### 2. Instalasi
 1.  **Clone repository ini ke komputermu:**
     ```bash
-    git clone [https://github.com/](https://github.com/)T13-1M/snow-bot.git
+    git clone [https://github.com/](https://github.com/)T13-1M/snow-botpy.git
     ```
 
 2.  **Pindah ke direktori proyek:**
