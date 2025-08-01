@@ -88,7 +88,7 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
     channel = bot.get_channel(ID_CHANNEL_EXIT)
-    
+
     embed = discord.Embed(
         title = "**GOODBYE**",
         description= f"selamat tinggal {member.name}",
@@ -117,7 +117,7 @@ async def on_message(message):
 
         if user_id not in riwayat_chat:
             riwayat_chat[user_id] = model.start_chat(history=[])
-        
+
         try:
             respon = riwayat_chat[user_id].send_message(prompt)
             teks_bersih = respon.text.strip("` ")
@@ -161,7 +161,7 @@ async def on_command_error(ctx, error):
 
 @bot.command()
 @commands.is_owner()
-async def cls(ctx, jumlah: int):
+async def clear(ctx, jumlah: int):
     """Menghapus chat menggunakan command"""
     await ctx.channel.purge(limit = jumlah + 1)
     await ctx.send(f"berhasil menghapus pesan sejumlah {jumlah + 1}", delete_after = 5 )
@@ -188,7 +188,7 @@ async def setlevel(ctx, member: discord.Member, *, value: str):
 
     if user_id not in user_data:
         user_data[user_id] = {'rank': 'None', 'level': 0, 'xp': 0}
-    
+
     try:
         level_angka = int(value)
         user_data[user_id]['level'] = level_angka
@@ -211,7 +211,7 @@ async def kick(ctx, member: discord.Member, *, reason = "Takbisa berkata-kata"):
         return await ctx.send("anda tidak bisa mengeluarkan saya.")
     if member == ctx.author:
         return await ctx.send("anda tidak bisa mengeluarkan diri anda sendiri.")
-    
+
     await member.kick(reason = f"Di kick oleh {ctx.author.name}. Alasan: {reason}")
 
     embed = discord.Embed(
@@ -236,7 +236,7 @@ async def menu(ctx):
     if bot.user.display_avatar:
         embed.set_thumbnail(url = bot.user.display_avatar.url)
     embed.add_field(name = "**GENERAL**", value = "", inline = False)
-    
+
     embed.add_field(name = "!halo", value = "buat nyapa bot.", inline = False)
     embed.add_field(name = "!leaderboard / !lb", value = "buat liat top 10 level terttinggi", inline = False)
     embed.add_field(name = "!meme", value = "pake ini biar bot bisa ngirim meme", inline = False)
@@ -274,13 +274,13 @@ async def rank(ctx, member: discord.Member = None):
             embed.add_field(name = "Rank", value = rank_sekarang, inline = False)
             embed.add_field(name = "Level", value = level_sekarang, inline = False)
             embed.add_field(name = "xp", value = xp_sekarang, inline = False)
-        
+
         elif isinstance(level_sekarang, int):
             xp_dibutuhkan = 5 * (level_sekarang ** 2) + (50 * level_sekarang) + 100
             embed.add_field(name = "Rank", value = rank_sekarang, inline = False)
             embed.add_field(name = "Level", value = level_sekarang, inline = False)
             embed.add_field(name = "xp", value = f"{xp_sekarang} / {xp_dibutuhkan}", inline = False)
-            
+
 
         await ctx.send(embed = embed)
     else:
@@ -317,7 +317,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='Status', value=f'{str(target.status).capitalize()}', inline=True)
     embed.add_field(name="Akun Dibuat", value=f'<t:{int(target.created_at.timestamp())}:D>', inline=True)
     embed.add_field(name="Bergabung Server", value=f'<t:{int(target.joined_at.timestamp())}:D>', inline=True)
-    
+
     await ctx.send(embed = embed)
 
 @bot.command()
@@ -408,7 +408,7 @@ async def coinflip(ctx, tebakan_user: str):
     if tebakan_user not in pilihan_valid:
         await ctx.send(f"pilihan {tebakan_user} ini tidak valid, pilih antara `Gambar` atau `Coin`.")
         return
-    
+
     pilihan_bot = random.choice(pilihan_valid)
     hasil = f"Kamu memilih {tebakan_user}\nbot melempar coin  dan hasil nya adalah **{pilihan_bot}**\n\n"
 
@@ -416,7 +416,7 @@ async def coinflip(ctx, tebakan_user: str):
         hasil += "Tebakan mu **BENAR**🎉"
     else:
         hasil += "Tebakan mu **SALAH**❌"
-    
+
     await ctx.send(hasil)
 
 
